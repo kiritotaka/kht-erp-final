@@ -37,14 +37,14 @@
         <div class="text-center">
           <img src="@/assets/images/logo.png" class="h-full m-auto w-1/2" />
           <h1 class="block text-2xl font-bold text-gray-800 mt-4">Đăng nhập</h1>
-          <p class="mt-2 text-sm text-gray-600">
+          <!-- <p class="mt-2 text-sm text-gray-600">
             Chưa có tài khoản?
             <router-link
               class="text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium"
               :to="'/register'"
               >Đăng ký</router-link
             >
-          </p>
+          </p> -->
         </div>
 
         <div class="mt-5">
