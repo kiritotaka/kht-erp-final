@@ -156,7 +156,7 @@ export default {
       return moment(val).format(str);
     },
     checkPermission() {
-      let per = ["admin", "manager"];
+      let per = ["admin","supervisor", "manager"];
       return per.includes(this.dataLogin?.user?._permission?.permission);
     },
     findUser(val) {

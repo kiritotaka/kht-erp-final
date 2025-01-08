@@ -16,6 +16,7 @@ export const useBaseStore = defineStore({
     authToken: null,
     registerData: null,
     departmentListData: null,
+    permissionListData: null,
   }),
   actions: {
     overlayChange(status: boolean) {
@@ -42,6 +43,13 @@ export const useBaseStore = defineStore({
         this.departmentListData = resp.data;
       });
       return this.departmentListData;
+    },
+    //danh sach phan quyền
+    async getlistPermission(url: string) {
+      await baseService.fetch(API_URL_BASE + url).then((resp) => {
+        this.permissionListData = resp.data;
+      });
+      return this.permissionListData;
     },
   },
   persist: true,

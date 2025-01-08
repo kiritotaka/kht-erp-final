@@ -106,7 +106,7 @@ export default {
     },
   },
   created() {
-    this.recruitmentDepartment = this.dataLogin.user._department.name;
+    this.recruitmentDepartment = this.dataLogin.user?._department?.name;
   },
 };
 </script>

@@ -22,17 +22,21 @@ export default {
   },
   methods: {
     ...mapActions(useCustomerStore, ["getListUser"]),
-    ...mapActions(useBaseStore, ["getListDepartment"]),
+    ...mapActions(useBaseStore, ["getListDepartment", "getlistPermission"]),
     fetchUser() {
       this.getListUser("/user");
     },
     fetchDepartment() {
       this.getListDepartment("/department");
     },
+    fetchPermission() {
+      this.getlistPermission("/permission");
+    },
   },
   created() {
     this.fetchUser();
     this.fetchDepartment();
+    this.fetchPermission();
   },
 };
 </script>

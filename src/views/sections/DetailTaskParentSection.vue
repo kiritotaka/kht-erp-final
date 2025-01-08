@@ -498,7 +498,7 @@ export default {
     ]),
     ...mapActions(useBaseStore, ["snackChange"]),
     checkPermission() {
-      let per = ["admin", "manager", "leader"];
+      let per = ["admin", "manager","supervisor", "leader"];
       return per.includes(this.dataLogin.user._permission.permission);
     },
     addChild() {
