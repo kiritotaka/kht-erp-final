@@ -11,6 +11,7 @@
 import { mapActions } from "pinia";
 import MenuComponentVue from "../components/MenuComponent.vue";
 import { useCustomerStore } from "../stores/customerStore";
+import { useBaseStore } from "../stores/baseStore";
 export default {
   name: "MasterPage",
   components: {
@@ -21,12 +22,17 @@ export default {
   },
   methods: {
     ...mapActions(useCustomerStore, ["getListUser"]),
-    fetchUser(){
-        this.getListUser('/user')
-    }
+    ...mapActions(useBaseStore, ["getListDepartment"]),
+    fetchUser() {
+      this.getListUser("/user");
+    },
+    fetchDepartment() {
+      this.getListDepartment("/department");
+    },
   },
   created() {
     this.fetchUser();
+    this.fetchDepartment();
   },
 };
 </script>

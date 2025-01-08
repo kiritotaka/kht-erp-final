@@ -1,13 +1,13 @@
 import { defineStore } from "pinia";
 import { baseService } from "../services/base-service";
 const API_URL_AUTHEN = import.meta.env.VITE_API_URL_AUTHEN;
-
+const API_URL_BASE = import.meta.env.VITE_API_URL_BASE;
 export const useBaseStore = defineStore({
   id: "base",
   state: () => ({
     snack: {
       status: false,
-      message: "sdd",
+      message: "",
       color: "",
     },
     overlay: false,
@@ -15,6 +15,7 @@ export const useBaseStore = defineStore({
     dataLogin: null,
     authToken: null,
     registerData: null,
+    departmentListData: null,
   }),
   actions: {
     overlayChange(status: boolean) {
@@ -35,6 +36,12 @@ export const useBaseStore = defineStore({
         this.registerData = resp.data;
       });
       return this.registerData;
+    },
+    async getListDepartment(url: string) {
+      await baseService.fetch(API_URL_BASE + url).then((resp) => {
+        this.departmentListData = resp.data;
+      });
+      return this.departmentListData;
     },
   },
   persist: true,

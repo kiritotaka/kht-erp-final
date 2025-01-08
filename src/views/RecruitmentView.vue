@@ -41,7 +41,12 @@
       </div>
     </v-form>
     <div class="m-auto mt-3">
-      <v-btn variant="flat" color="blue-darken-3" @click="submit" class="w-full">
+      <v-btn
+        variant="flat"
+        color="blue-darken-3"
+        @click="submit"
+        class="w-full"
+      >
         Xác nhận
       </v-btn>
     </div>
@@ -49,9 +54,10 @@
 </template>
 
 <script>
-import { mapState } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { useCustomerStore } from "../stores/customerStore";
 import { useBaseStore } from "../stores/baseStore";
+import moment from 'moment'
 export default {
   name: "RecruitmentPage",
   data() {
@@ -73,9 +79,30 @@ export default {
     ...mapState(useBaseStore, ["dataLogin"]),
   },
   methods: {
+    ...mapActions(useCustomerStore, ["postRecruitmentAction"]),
+    ...mapActions(useBaseStore, ["snackChange"]),
     async submit() {
-      const { valid } = await this.$refs.form.validate()
-      if (valid) {}
+      const { valid } = await this.$refs.form.validate();
+      if (valid) {
+        let params = {
+          description: this.recruitmentDescription,
+          name: this.recruitmentName,
+          quantity: this.recruitmentQuantity,
+          status: 0,
+          user_id: this.dataLogin.user.id,
+          department_id: this.dataLogin.user._department.id,
+          request_date: moment(new Date()).format(),
+        };
+        this.postRecruitmentAction('/recruitment_request', params).then(resp => {
+          if(resp){
+            this.snackChange({
+              status: true,
+              message: "Tạo yêu cầu tuyển dụng thành công",
+              color: "blue-darken-4",
+            });
+          }
+        })
+      }
     },
   },
   created() {

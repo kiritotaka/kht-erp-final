@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { type IStaticMethods } from "preline/preline";
 import { useBaseStore } from "../stores/baseStore";
+import { useCustomerStore } from "../stores/customerStore";
 declare global {
   interface Window {
     HSStaticMethods: IStaticMethods;
@@ -24,6 +25,30 @@ const router = createRouter({
           name: "recruitment",
           component: () => import("../views/RecruitmentView.vue"),
         },
+        {
+          path: "/recruitmentList",
+          name: "recruitmentList",
+          component: () =>
+            import("../views/sections/RecruitmentListSection.vue"),
+        },
+        {
+          path: "/create-probation",
+          name: "addNewProbation",
+          component: () =>
+            import("../views/sections/AddProbationSection.vue"),
+        },
+        {
+          path: "/probation-review",
+          name: "reviewProbation",
+          component: () =>
+            import("../views/sections/ProbationReviewSection.vue"),
+        },
+        {
+          path: "/report",
+          name: "reportview",
+          component: () =>
+            import("../views/ReportView.vue"),
+        },
       ],
     },
     {
@@ -36,13 +61,16 @@ const router = createRouter({
       name: "register",
       component: () => import("../views/RegisterView.vue"),
     },
+    { path: '/:pathMatch(.*)', component: () => import('../views/LoginView.vue') }
   ],
 });
 router.beforeEach((to, from, next) => {
   const baseStore = useBaseStore();
-
+  const customerStore = useCustomerStore();
   if (to.path === "/login" || to.path === "/register") {
     baseStore.$state.dataLogin = null;
+    baseStore.$reset();
+    customerStore.$reset();
     next();
   } else if (baseStore.$state.dataLogin == null) {
     next({ path: "/login" });

@@ -77,13 +77,13 @@
         >
           <ul class="flex flex-col space-y-1">
             <li>
-              <a
+              <router-link
                 class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-700 dark:text-white"
-                href="#"
+                :to="'/assign'"
               >
                 <span class="mdi mdi-home text-lg"></span>
                 Trang chủ
-              </a>
+              </router-link>
             </li>
             <li class="hs-accordion" id="account-accordion">
               <button
@@ -142,33 +142,41 @@
                     </router-link>
                   </li>
                   <li v-if="checkPermission()">
-                    <a
+                    <router-link
                       class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                      href="#"
+                      :to="'/recruitmentList'"
                     >
                       Danh sách tuyển dụng
-                    </a>
+                    </router-link>
                   </li>
-                  <li>
-                    <a
+                  <li v-if="checkPermission()">
+                    <router-link
                       class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
-                      href="#"
+                      :to="'/create-probation'"
+                    >
+                      Thêm nhân viên thử việc
+                    </router-link>
+                  </li>
+                  <li v-if="checkPermission()">
+                    <router-link
+                      class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
+                      :to="'/probation-review'"
                     >
                       Theo dõi nhân sự thử việc
-                    </a>
+                    </router-link>
                   </li>
                 </ul>
               </div>
             </li>
 
             <li v-if="checkPermission()">
-              <a
+              <router-link
                 class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300"
-                href="#"
+                :to="'/report'"
               >
                 <span class="mdi mdi-poll"></span>
                 Thống kê
-              </a>
+              </router-link>
             </li>
             <li>
               <router-link

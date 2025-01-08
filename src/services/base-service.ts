@@ -28,6 +28,17 @@ async function fetch(url: string) {
     return handleError(error);
   }
 }
+async function fetchParams(url: string, params: any) {
+  const header = getHeader();
+  const baseStore = useBaseStore();
+  baseStore.overlayChange(true);
+  try {
+    const response = await axios.get(url, { headers: header, params: params });
+    return handleSuccess(response);
+  } catch (error) {
+    return handleError(error);
+  }
+}
 async function add(url: string, params: any) {
   const header = getHeader();
   const baseStore = useBaseStore();
@@ -51,16 +62,16 @@ async function update(url: string, params: any) {
   }
 }
 async function change(url: string, params: any) {
-    const header = getHeader();
-    const baseStore = useBaseStore();
-    baseStore.overlayChange(true);
-    try {
-      const response = await axios.patch(url, params, { headers: header });
-      return handleSuccess(response);
-    } catch (error) {
-      return handleError(error);
-    }
+  const header = getHeader();
+  const baseStore = useBaseStore();
+  baseStore.overlayChange(true);
+  try {
+    const response = await axios.patch(url, params, { headers: header });
+    return handleSuccess(response);
+  } catch (error) {
+    return handleError(error);
   }
+}
 async function remove(url: string) {
   const header = getHeader();
   const baseStore = useBaseStore();
@@ -95,6 +106,7 @@ const handleError = (data: any) => {
 };
 export const baseService = {
   fetch,
+  fetchParams,
   add,
   update,
   change,

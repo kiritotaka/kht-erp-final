@@ -16,6 +16,14 @@ export const useCustomerStore = defineStore({
     taskCommentData: null,
     addImageData: null,
     updateImgToTaskData: null,
+    createRecruitmentData: null,
+    recruitmentListData: null,
+    recruitmentAcceptData: null,
+    addProbationData: null,
+    listProbationData: null,
+    addProbationCommentData: null,
+    updateCommentToProbationData: null,
+    probationCommentData: null,
   }),
   actions: {
     //lay danh sach user
@@ -109,6 +117,67 @@ export const useCustomerStore = defineStore({
         this.updateImgToTaskData = resp.data;
       });
       return this.updateImgToTaskData;
+    },
+    //tạo yêu cầu tuyển dụng
+    async postRecruitmentAction(url: string, params: any) {
+      await baseService.add(API_URL_BASE + url, params).then((resp) => {
+        this.createRecruitmentData = resp.data;
+      });
+      return this.createRecruitmentData;
+    },
+    //lấy danh sách tuyển dụng
+    async fetchListRecruitment(url: string, params: any) {
+      await baseService.fetchParams(API_URL_BASE + url, params).then((resp) => {
+        this.recruitmentListData = resp.data;
+      });
+      return this.recruitmentListData;
+    },
+    //cập nhật yêu cầu tuyển dụng
+    async updateRecruitment(url: string, params: any) {
+      await baseService.change(API_URL_BASE + url, params).then((resp) => {
+        this.recruitmentAcceptData = resp.data;
+      });
+      return this.recruitmentAcceptData;
+    },
+    //thêm nhân sự thử việc
+    async addNewProbation(url: string, params: any) {
+      await baseService.add(API_URL_BASE + url, params).then((resp) => {
+        this.addProbationData = resp.data;
+      });
+      return this.addProbationData;
+    },
+    //danh sách nhân sự thử việc
+    async fetchListProbation(url: string, params: any) {
+      await baseService.fetchParams(API_URL_BASE + url, params).then((resp) => {
+        this.listProbationData = resp.data;
+      });
+      return this.listProbationData;
+    },
+    //Thêm mới đáng giá nhân sự
+    async addProbationComment(url: string, params: any) {
+      await baseService.add(API_URL_BASE + url, params).then((resp) => {
+        this.addProbationCommentData = resp.data;
+      });
+      return this.addProbationCommentData;
+    },
+    //Cập nhật comment vào probation
+    async updateCommentProbation(url: string, params: any) {
+      await baseService.change(API_URL_BASE + url, params).then((resp) => {
+        this.updateCommentToProbationData = resp.data;
+      });
+      return this.updateCommentToProbationData;
+    },
+    //action comment probation
+    async actionProbationComment(paramsAdd: any, paramsUpdate: any) {
+      await this.addProbationComment("/probation_comment", paramsAdd);
+      paramsUpdate.probation_comment_id.push(this.addProbationCommentData.id);
+      await this.updateCommentProbation(
+        `/probation/${paramsUpdate.id}`,
+        paramsUpdate
+      ).then((resp) => {
+        this.probationCommentData = resp;
+      });
+      return this.probationCommentData;
     },
   },
   persist: true,
