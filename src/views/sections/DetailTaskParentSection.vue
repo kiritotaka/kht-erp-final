@@ -1,8 +1,8 @@
 <template>
   <v-dialog v-model="dialog" max-width="800" persistent>
     <v-card>
-      <v-card-text>
-        <div class="flex justify-between mb-5">
+      <v-card-text class="p-0">
+        <div class="flex justify-between mb-3">
           <div class="font-bold text-xl">Chi tiết công việc</div>
           <div>
             <span
@@ -73,7 +73,10 @@
                 }}</span>
               </div>
               <div
-                v-if="!item.progress && checkPermission()"
+                v-if="
+                  !item.progress &&
+                  checkPermission(['admin', 'manager', 'leader', 'supervisor'])
+                "
                 class="mdi mdi-pencil cursor-pointer"
                 @click="updateDate(item)"
               ></div>
@@ -101,7 +104,10 @@
               >
               <span
                 class="mdi mdi-pencil cursor-pointer"
-                v-if="!item.progress && checkPermission()"
+                v-if="
+                  !item.progress &&
+                  checkPermission(['admin', 'manager', 'leader', 'supervisor'])
+                "
                 @click="updateProcessChild(item)"
               ></span>
             </div>
@@ -197,103 +203,90 @@
           </div>
         </div>
         <v-form ref="form" v-model="valid" @submit.prevent="submit">
-          <v-row>
-            <v-col cols="12">
-              <v-text-field
-                label="Tiêu đề"
-                variant="outlined"
-                density="comfortable"
-                v-model="name"
-                :rules="[rules.required]"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12">
-              <v-textarea
-                placeholder="Mô tả chi tiết nội dung công việc"
-                label="Nội dung công việc"
-                variant="outlined"
-                density="comfortable"
-                v-model="description"
-                :rules="[rules.required]"
-                auto-grow
-              ></v-textarea>
-            </v-col>
-            <v-col cols="12">
-              <v-autocomplete
-                label="Giao cho"
-                variant="outlined"
-                density="comfortable"
-                v-model="assigned_user_id"
-                :items="userListData"
-                :rules="[rules.required]"
-                item-title="name"
-                item-value="id"
-              >
-              </v-autocomplete>
-            </v-col>
-            <v-col cols="12">
-              <v-autocomplete
-                label="Người giám sát"
-                variant="outlined"
-                density="comfortable"
-                v-model="supervisor_id"
-                :items="userListData"
-                :rules="[rules.required]"
-                item-title="name"
-                item-value="id"
-              >
-              </v-autocomplete>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="4">
-              <v-date-input
-                prepend-icon=""
-                label="Ngày bắt đầu"
-                variant="outlined"
-                v-model="fromDate"
-                class="p-date hideDate"
-                :cancel-text="'Đóng'"
-                :hide-actions="true"
-                placeholder="dd/mm/yyyy"
-                :format="'dd/mm/yyyy'"
-                :rules="[rules.required]"
-                :min="todayDate"
-              >
-                <template v-slot:default>
-                  {{ fromDateFormated }}
-                </template>
-              </v-date-input>
-            </v-col>
-            <v-col cols="4">
-              <v-date-input
-                prepend-icon=""
-                label="Ngày hoàn thành"
-                variant="outlined"
-                v-model="toDate"
-                class="p-date hideDate"
-                :cancel-text="'Đóng'"
-                :hide-actions="true"
-                placeholder="dd/mm/yyyy"
-                :format="'dd/mm/yyyy'"
-                :rules="[rules.required]"
-                :min="todayDate"
-              >
-                <template v-slot:default>
-                  {{ toDateFormated }}
-                </template>
-              </v-date-input>
-            </v-col>
-            <v-col cols="4">
-              <v-switch label="Ưu tiên" v-model="priority"></v-switch>
-            </v-col>
-          </v-row>
+          <div class="grid grid-cols-1 gap-3">
+            <v-text-field
+              label="Tiêu đề"
+              variant="outlined"
+              density="comfortable"
+              v-model="name"
+              :rules="[rules.required]"
+            ></v-text-field>
+            <v-textarea
+              placeholder="Mô tả chi tiết nội dung công việc"
+              label="Nội dung công việc"
+              variant="outlined"
+              density="comfortable"
+              v-model="description"
+              :rules="[rules.required]"
+              auto-grow
+            ></v-textarea>
+            <v-autocomplete
+              label="Giao cho"
+              variant="outlined"
+              density="comfortable"
+              v-model="assigned_user_id"
+              :items="userListData"
+              :rules="[rules.required]"
+              item-title="name"
+              item-value="id"
+            >
+            </v-autocomplete>
+            <v-autocomplete
+              label="Người giám sát"
+              variant="outlined"
+              density="comfortable"
+              v-model="supervisor_id"
+              :items="userListData"
+              :rules="[rules.required]"
+              item-title="name"
+              item-value="id"
+            >
+            </v-autocomplete>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <v-date-input
+              prepend-icon=""
+              label="Ngày bắt đầu"
+              variant="outlined"
+              v-model="fromDate"
+              class="p-date hideDate"
+              :cancel-text="'Đóng'"
+              :hide-actions="true"
+              placeholder="dd/mm/yyyy"
+              :format="'dd/mm/yyyy'"
+              :rules="[rules.required]"
+              :min="todayDate"
+            >
+              <template v-slot:default>
+                {{ fromDateFormated }}
+              </template>
+            </v-date-input>
+            <v-date-input
+              prepend-icon=""
+              label="Ngày hoàn thành"
+              variant="outlined"
+              v-model="toDate"
+              class="p-date hideDate"
+              :cancel-text="'Đóng'"
+              :hide-actions="true"
+              placeholder="dd/mm/yyyy"
+              :format="'dd/mm/yyyy'"
+              :rules="[rules.required]"
+              :min="todayDate"
+            >
+              <template v-slot:default>
+                {{ toDateFormated }}
+              </template>
+            </v-date-input>
+            <v-switch label="Ưu tiên" v-model="priority"></v-switch>
+          </div>
         </v-form>
-        <div class="text-center normal-case">
+        <div class="text-center normal-case mt-3">
           <v-btn
             variant="flat"
             color="blue-darken-4"
             class="mt-3 w-3/5 m-auto"
+            size="large"
             @click="submit"
             ><span class="text-md normal-case">Xác nhận</span></v-btn
           >
@@ -441,6 +434,7 @@ import { useCustomerStore } from "../../stores/customerStore";
 import moment from "moment";
 import { useBaseStore } from "../../stores/baseStore";
 import JQuery from "jquery";
+import baseModel from "../../services/base-model";
 export default {
   name: "ParentTaskDetail",
   props: {
@@ -497,9 +491,8 @@ export default {
       "putImgTaskAction",
     ]),
     ...mapActions(useBaseStore, ["snackChange"]),
-    checkPermission() {
-      let per = ["admin", "manager","supervisor", "leader"];
-      return per.includes(this.dataLogin.user._permission.permission);
+    checkPermission(arr) {
+      return baseModel.checkPermission(arr);
     },
     addChild() {
       this.name = null;

@@ -141,7 +141,7 @@
                       Yêu cầu tuyển dụng
                     </router-link>
                   </li>
-                  <li v-if="checkPermission()">
+                  <li v-if="checkPermission(['admin','manager','leader','supervisor'])">
                     <router-link
                       class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
                       :to="'/recruitmentList'"
@@ -149,7 +149,7 @@
                       Danh sách tuyển dụng
                     </router-link>
                   </li>
-                  <li v-if="checkPermission()">
+                  <li v-if="checkPermission(['admin','manager','leader','supervisor'])">
                     <router-link
                       class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
                       :to="'/create-probation'"
@@ -157,7 +157,7 @@
                       Thêm nhân viên thử việc
                     </router-link>
                   </li>
-                  <li v-if="checkPermission()">
+                  <li v-if="checkPermission(['admin','manager','leader','supervisor'])">
                     <router-link
                       class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
                       :to="'/probation-review'"
@@ -169,7 +169,7 @@
               </div>
             </li>
 
-            <li v-if="checkPermission()">
+            <li v-if="checkPermission(['admin','manager','leader','supervisor'])">
               <router-link
                 class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300"
                 :to="'/report'"
@@ -181,7 +181,7 @@
             <li
               class="hs-accordion"
               id="setting-accordion"
-              v-if="adminPermission()"
+              v-if="checkPermission(['admin','manager','supervisor'])"
             >
               <button
                 type="button"
@@ -246,7 +246,7 @@
                       Cài đặt quyền
                     </router-link>
                   </li> -->
-                  <li v-if="checkPermission()">
+                  <li v-if="checkPermission(['admin','manager','supervisor'])">
                     <router-link
                       class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:text-neutral-200"
                       :to="'/user-setting'"
@@ -279,6 +279,7 @@
 <script>
 import { mapState } from "pinia";
 import { useBaseStore } from "../stores/baseStore";
+import baseModel from '../services/base-model';
 export default {
   name: "Menu",
   data() {
@@ -288,13 +289,8 @@ export default {
     ...mapState(useBaseStore, ["dataLogin"]),
   },
   methods: {
-    checkPermission() {
-      let per = ["admin", "manager", "leader", "supervisor"];
-      return per.includes(this.dataLogin?.user?._permission?.permission);
-    },
-    adminPermission() {
-      let per = ["admin", "manager"];
-      return per.includes(this.dataLogin?.user?._permission?.permission);
+    checkPermission(arr) {
+      return baseModel.checkPermission(arr)
     },
   },
 };

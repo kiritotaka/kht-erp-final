@@ -44,7 +44,7 @@
               }}
             </div>
           </div>
-          <div v-if="checkPermission()" class="flex justify-between text-sm">
+          <div v-if="checkPermission(['admin','manager','leader','supervisor'])" class="flex justify-between text-sm">
             <div>Thêm đánh giá</div>
             <span
               class="mdi mdi-comment-outline cursor-pointer text-red-darken-4 text-lg"
@@ -128,6 +128,7 @@ import { mapActions, mapState } from "pinia";
 import { useCustomerStore } from "../../stores/customerStore";
 import moment from "moment";
 import { useBaseStore } from "../../stores/baseStore";
+import baseModel from '../../services/base-model';
 export default {
   name: "ReviewProbationPage",
   data() {
@@ -199,9 +200,8 @@ export default {
     formatDate(val, str) {
       return moment(val).format(str);
     },
-    checkPermission() {
-      let per = ["admin", "manager", "supervisor", "leader"];
-      return per.includes(this.dataLogin?.user?._permission?.permission);
+    checkPermission(arr) {
+      return baseModel.checkPermission(arr)
     },
     findUser(val) {
       if (val) {

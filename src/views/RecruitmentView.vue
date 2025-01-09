@@ -1,5 +1,5 @@
 <template>
-  <div class="my-3 text-lg font-bold">Tạo yêu cầu tuyển dụng</div>
+  <div class="my-3 text-lg font-bold max-w-lg m-auto">Tạo yêu cầu tuyển dụng</div>
   <div class="border p-3 max-w-lg m-auto rounded-lg">
     <v-form v-model="valid" ref="form" @submit.prevent="submit">
       <div class="grid grid-cols-2 gap-3">

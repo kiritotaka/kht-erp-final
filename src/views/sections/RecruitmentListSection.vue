@@ -1,5 +1,5 @@
 <template>
-  <div class="text-lg font-bold">Danh sách tuyển dụng</div>
+  <div class="text-lg font-bold max-w-lg m-auto">Danh sách tuyển dụng</div>
   <div class="p-3 m-auto rounded-lg mt-3">
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
       <div v-for="(item, index) in listData" :key="index">
@@ -32,7 +32,7 @@
               Đang chờ xử lý
               <span
                 class="mdi mdi-pencil cursor-pointer"
-                v-if="checkPermission()"
+                v-if="checkPermission(['admin','manager','supervisor'])"
                 @click="updateData(item)"
               ></span>
             </div>
@@ -110,6 +110,7 @@ import { mapActions, mapState } from "pinia";
 import { useCustomerStore } from "../../stores/customerStore";
 import moment from "moment";
 import { useBaseStore } from "../../stores/baseStore";
+import baseModel from '../../services/base-model';
 export default {
   name: "RecruitmentListPage",
   data() {
@@ -155,9 +156,8 @@ export default {
     formatDate(val, str) {
       return moment(val).format(str);
     },
-    checkPermission() {
-      let per = ["admin","supervisor", "manager"];
-      return per.includes(this.dataLogin?.user?._permission?.permission);
+    checkPermission(arr) {
+      return baseModel.checkPermission(arr)
     },
     findUser(val) {
       if (val) {

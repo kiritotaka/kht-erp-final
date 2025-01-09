@@ -9,43 +9,37 @@
           </div>
         </div>
         <v-form ref="form" v-model="valid" @submit.prevent="submit">
-          <v-row>
-            <v-col cols="12">
-              <v-text-field
-                label="Tiêu đề"
-                variant="outlined"
-                density="comfortable"
-                v-model="name"
-                :rules="rules"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12">
-              <v-textarea
-                placeholder="Mô tả chi tiết nội dung công việc"
-                label="Nội dung công việc"
-                variant="outlined"
-                density="comfortable"
-                v-model="description"
-                :rules="rules"
-                auto-grow
-              ></v-textarea>
-            </v-col>
-            <v-col cols="12">
-              <v-autocomplete
-                label="Giám sát tổng"
-                variant="outlined"
-                density="comfortable"
-                v-model="user_charge"
-                :items="userListData"
-                :rules="rules"
-                item-title="name"
-                item-value="id"
-              >
-              </v-autocomplete>
-            </v-col>
-          </v-row>
+          <div class="grid gap-3">
+            <v-text-field
+              label="Tiêu đề"
+              variant="outlined"
+              density="comfortable"
+              v-model="name"
+              :rules="rules"
+            ></v-text-field>
+            <v-textarea
+              placeholder="Mô tả chi tiết nội dung công việc"
+              label="Nội dung công việc"
+              variant="outlined"
+              density="comfortable"
+              v-model="description"
+              :rules="rules"
+              auto-grow
+            ></v-textarea>
+            <v-autocomplete
+              label="Giám sát tổng"
+              variant="outlined"
+              density="comfortable"
+              v-model="user_charge"
+              :items="userListData"
+              :rules="rules"
+              item-title="name"
+              item-value="id"
+            >
+            </v-autocomplete>
+          </div>
         </v-form>
-        <div class="text-center normal-case">
+        <div class="text-center normal-case mt-3">
           <v-btn
             variant="flat"
             color="blue-darken-4"

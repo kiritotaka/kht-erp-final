@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-between overflow-auto">
     <div class="flex mx-10">
-      <div class="card1 w-64 grid px-3">
+      <div class="card1 w-64 grid px-3 mb-4">
         <div class="bg-white p-3 grid rounded-lg h-[75px] cursor-pointer">
           <div class="w-1/3">
             <v-progress-linear
@@ -23,7 +23,7 @@
           </div>
         </div>
         <draggable
-          class="dragArea list-group w-full"
+          class="dragArea list-group w-full min-h-[100px] bg-gray-200 rounded-lg"
           :list="list0"
           group="people"
           :sort="true"
@@ -31,19 +31,19 @@
           :move="checkMove"
         >
           <div
-            class="list-group-item bg-gray-300 cursor-pointer m-1 p-3 rounded-md text-center"
+            class="list-group-item bg-gray-300 cursor-pointer mx-1 my-3 p-3 rounded-md text-center"
             v-for="element in list0"
             :key="element.name"
             @click="openDetail(element)"
           >
             <div class="flex justify-between items-center">
-              <div>{{ element.name }}</div>
+              <div class="text-sm font-bold text-blue-darken-4">{{ element.name }}</div>
               <div class="text-sm">{{ formatDateVN(element.updated_at) }}</div>
             </div>
           </div>
         </draggable>
       </div>
-      <div class="card1 w-64 grid px-3">
+      <div class="card1 w-64 grid px-3 mb-4">
         <div class="bg-white p-3 grid rounded-lg h-[75px] cursor-pointer">
           <div class="w-1/3">
             <v-progress-linear
@@ -55,7 +55,7 @@
           <div class="font-bold my-3">Nguyên vật liệu</div>
         </div>
         <draggable
-          class="dragArea list-group w-full"
+          class="dragArea list-group w-full min-h-[100px] bg-gray-200 rounded-lg"
           :list="list1"
           group="people"
           @change="log($event, 1)"
@@ -74,7 +74,7 @@
           </div>
         </draggable>
       </div>
-      <div class="card1 w-64 grid px-3">
+      <div class="card1 w-64 grid px-3 mb-4">
         <div class="bg-white p-3 grid rounded-lg h-[75px] cursor-pointer">
           <div class="w-1/3">
             <v-progress-linear
@@ -86,7 +86,7 @@
           <div class="font-bold my-3">Sắp file</div>
         </div>
         <draggable
-          class="dragArea list-group w-full"
+          class="dragArea list-group w-full min-h-[100px] bg-gray-200 rounded-lg"
           :list="list2"
           group="people"
           @change="log($event, 2)"
@@ -105,7 +105,7 @@
           </div>
         </draggable>
       </div>
-      <div class="card1 w-64 grid px-3">
+      <div class="card1 w-64 grid px-3 mb-4">
         <div class="bg-white p-3 grid rounded-lg h-[75px] cursor-pointer">
           <div class="w-1/3">
             <v-progress-linear
@@ -117,7 +117,7 @@
           <div class="font-bold my-3">In</div>
         </div>
         <draggable
-          class="dragArea list-group w-full"
+          class="dragArea list-group w-full min-h-[100px] bg-gray-200 rounded-lg"
           :list="list3"
           group="people"
           @change="log($event, 3)"
@@ -136,7 +136,7 @@
           </div>
         </draggable>
       </div>
-      <div class="card1 w-64 grid px-3">
+      <div class="card1 w-64 grid px-3 mb-4">
         <div class="bg-white p-3 grid rounded-lg h-[75px] cursor-pointer">
           <div class="w-1/3">
             <v-progress-linear
@@ -148,7 +148,7 @@
           <div class="font-bold my-3">Cắt</div>
         </div>
         <draggable
-          class="dragArea list-group w-full"
+          class="dragArea list-group w-full min-h-[100px] bg-gray-200 rounded-lg"
           :list="list4"
           group="people"
           @change="log($event, 4)"
@@ -167,7 +167,7 @@
           </div>
         </draggable>
       </div>
-      <div class="card1 w-64 grid px-3">
+      <div class="card1 w-64 grid px-3 mb-4">
         <div class="bg-white p-3 grid rounded-lg h-[75px] cursor-pointer">
           <div class="w-1/3">
             <v-progress-linear
@@ -179,7 +179,7 @@
           <div class="font-bold my-3">Gia công ráp</div>
         </div>
         <draggable
-          class="dragArea list-group w-full"
+          class="dragArea list-group w-full min-h-[100px] bg-gray-200 rounded-lg"
           :list="list5"
           group="people"
           @change="log($event, 5)"
@@ -198,7 +198,7 @@
           </div>
         </draggable>
       </div>
-      <div class="card1 w-64 grid px-3">
+      <div class="card1 w-64 grid px-3 mb-4">
         <div class="bg-white p-3 grid rounded-lg h-[75px] cursor-pointer">
           <div class="w-1/3">
             <v-progress-linear
@@ -210,7 +210,7 @@
           <div class="font-bold my-3">Cố định</div>
         </div>
         <draggable
-          class="dragArea list-group w-full"
+          class="dragArea list-group w-full min-h-[100px] bg-gray-200 rounded-lg"
           :list="list6"
           group="people"
           @change="log($event, 6)"
@@ -229,7 +229,7 @@
           </div>
         </draggable>
       </div>
-      <div class="card1 w-64 grid px-3">
+      <div class="card1 w-64 grid px-3 mb-4">
         <div class="bg-white p-3 grid rounded-lg h-[75px] cursor-pointer">
           <div class="w-1/3">
             <v-progress-linear
@@ -241,7 +241,7 @@
           <div class="font-bold my-3">KC</div>
         </div>
         <draggable
-          class="dragArea list-group w-full"
+          class="dragArea list-group w-full min-h-[100px] bg-gray-200 rounded-lg"
           :list="list7"
           group="people"
           @change="log($event, 7)"
@@ -260,7 +260,7 @@
           </div>
         </draggable>
       </div>
-      <div class="card1 w-64 grid px-3">
+      <div class="card1 w-64 grid px-3 mb-4">
         <div class="bg-white p-3 grid rounded-lg h-[75px] cursor-pointer">
           <div class="w-1/3">
             <v-progress-linear
@@ -272,7 +272,7 @@
           <div class="font-bold my-3">Đóng gói</div>
         </div>
         <draggable
-          class="dragArea list-group w-full"
+          class="dragArea list-group w-full min-h-[100px] bg-gray-200 rounded-lg"
           :list="list8"
           group="people"
           @change="log($event, 8)"
