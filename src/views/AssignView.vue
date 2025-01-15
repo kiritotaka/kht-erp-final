@@ -62,13 +62,13 @@
           :move="checkMove"
         >
           <div
-            class="list-group-item bg-gray-300 cursor-pointer m-1 p-3 rounded-md text-center"
+            class="list-group-item bg-gray-300 cursor-pointer m-1 my-3 p-3 rounded-md text-center"
             v-for="element in list1"
             :key="element.name"
             @click="openDetail(element)"
           >
             <div class="flex justify-between items-center">
-              <div>{{ element.name }}</div>
+              <div class="text-sm font-bold text-blue-darken-4">{{ element.name }}</div>
               <div class="text-sm">{{ formatDateVN(element.updated_at) }}</div>
             </div>
           </div>
@@ -93,13 +93,13 @@
           :move="checkMove"
         >
           <div
-            class="list-group-item bg-gray-300 cursor-pointer m-1 p-3 rounded-md text-center"
+            class="list-group-item bg-gray-300 cursor-pointer m-1 my-3 p-3 rounded-md text-center"
             v-for="element in list2"
             :key="element.name"
             @click="openDetail(element)"
           >
             <div class="flex justify-between items-center">
-              <div>{{ element.name }}</div>
+              <div class="text-sm font-bold text-blue-darken-4">{{ element.name }}</div>
               <div class="text-sm">{{ formatDateVN(element.updated_at) }}</div>
             </div>
           </div>
@@ -124,13 +124,13 @@
           :move="checkMove"
         >
           <div
-            class="list-group-item bg-gray-300 cursor-pointer m-1 p-3 rounded-md text-center"
+            class="list-group-item bg-gray-300 cursor-pointer m-1 my-3 p-3 rounded-md text-center"
             v-for="element in list3"
             :key="element.name"
             @click="openDetail(element)"
           >
             <div class="flex justify-between items-center">
-              <div>{{ element.name }}</div>
+              <div class="text-sm font-bold text-blue-darken-4">{{ element.name }}</div>
               <div class="text-sm">{{ formatDateVN(element.updated_at) }}</div>
             </div>
           </div>
@@ -155,13 +155,13 @@
           :move="checkMove"
         >
           <div
-            class="list-group-item bg-gray-300 cursor-pointer m-1 p-3 rounded-md text-center"
+            class="list-group-item bg-gray-300 cursor-pointer m-1 my-3 p-3 rounded-md text-center"
             v-for="element in list4"
             :key="element.name"
             @click="openDetail(element)"
           >
             <div class="flex justify-between items-center">
-              <div>{{ element.name }}</div>
+              <div class="text-sm font-bold text-blue-darken-4">{{ element.name }}</div>
               <div class="text-sm">{{ formatDateVN(element.updated_at) }}</div>
             </div>
           </div>
@@ -186,13 +186,13 @@
           :move="checkMove"
         >
           <div
-            class="list-group-item bg-gray-300 cursor-pointer m-1 p-3 rounded-md text-center"
+            class="list-group-item bg-gray-300 cursor-pointer m-1 my-3 p-3 rounded-md text-center"
             v-for="element in list5"
             :key="element.name"
             @click="openDetail(element)"
           >
             <div class="flex justify-between items-center">
-              <div>{{ element.name }}</div>
+              <div class="text-sm font-bold text-blue-darken-4">{{ element.name }}</div>
               <div class="text-sm">{{ formatDateVN(element.updated_at) }}</div>
             </div>
           </div>
@@ -217,13 +217,13 @@
           :move="checkMove"
         >
           <div
-            class="list-group-item bg-gray-300 cursor-pointer m-1 p-3 rounded-md text-center"
+            class="list-group-item bg-gray-300 cursor-pointer m-1 my-3 p-3 rounded-md text-center"
             v-for="element in list6"
             :key="element.name"
             @click="openDetail(element)"
           >
             <div class="flex justify-between items-center">
-              <div>{{ element.name }}</div>
+              <div class="text-sm font-bold text-blue-darken-4">{{ element.name }}</div>
               <div class="text-sm">{{ formatDateVN(element.updated_at) }}</div>
             </div>
           </div>
@@ -248,13 +248,13 @@
           :move="checkMove"
         >
           <div
-            class="list-group-item bg-gray-300 cursor-pointer m-1 p-3 rounded-md text-center"
+            class="list-group-item bg-gray-300 cursor-pointer m-1 my-3 p-3 rounded-md text-center"
             v-for="element in list7"
             :key="element.name"
             @click="openDetail(element)"
           >
             <div class="flex justify-between items-center">
-              <div>{{ element.name }}</div>
+              <div class="text-sm font-bold text-blue-darken-4">{{ element.name }}</div>
               <div class="text-sm">{{ formatDateVN(element.updated_at) }}</div>
             </div>
           </div>
@@ -279,13 +279,13 @@
           :move="checkMove"
         >
           <div
-            class="list-group-item bg-gray-300 cursor-pointer m-1 p-3 rounded-md text-center"
+            class="list-group-item bg-gray-300 cursor-pointer m-1 my-3 p-3 rounded-md text-center"
             v-for="element in list8"
             :key="element.name"
             @click="openDetail(element)"
           >
             <div class="flex justify-between items-center">
-              <div>{{ element.name }}</div>
+              <div class="text-sm font-bold text-blue-darken-4">{{ element.name }}</div>
               <div class="text-sm">{{ formatDateVN(element.updated_at) }}</div>
             </div>
           </div>
@@ -462,9 +462,11 @@ export default {
       this.getTaskDetail(data);
     },
     addChildDone() {
+      this.getAssign();
       this.getTaskDetail(this.taskSelected);
     },
     updateChildDone() {
+      this.getAssign();
       this.getTaskDetail(this.taskSelected);
     },
   },

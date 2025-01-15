@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" max-width="800" persistent>
+  <v-dialog v-model="dialog" max-width="auto" persistent>
     <v-card>
       <v-card-text class="p-0">
         <div class="flex justify-between mb-3">
@@ -30,7 +30,7 @@
             >
           </div>
         </div>
-        <div class="grid md:grid-cols-2 gap-3">
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-3">
           <div
             class="rounded-lg p-3 hover:shadow-xl hover:bg-gray-200 border-2 bg-gray-100 relative"
             :class="item.priority ? 'border-red-800' : 'border-blue-600 '"
