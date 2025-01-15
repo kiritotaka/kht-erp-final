@@ -50,37 +50,31 @@
         <div class="mt-5">
           <!-- Form -->
           <v-form ref="form" v-model="valid" @submit.prevent="submit">
-            <v-row>
-              <v-col cols="12">
-                <v-text-field
-                  label="Tên đăng nhập"
-                  variant="outlined"
-                  density="comfortable"
-                  v-model="useName"
-                  :rules="rulesUserName"
-                ></v-text-field
-              ></v-col>
-              <v-col cols="12">
-                <v-text-field
-                  label="Mật khẩu"
-                  variant="outlined"
-                  density="comfortable"
-                  v-model="passWord"
-                  :rules="rulesPassWord"
-                  :type="visible ? 'text' : 'password'"
-                  ><template v-slot:append-inner>
-                    <button type="button" @click="visible = !visible">
-                      <i
-                        v-if="visible"
-                        class="far fa-eye eyes-button-custom"
-                      ></i>
-                      <i
-                        v-if="!visible"
-                        class="far fa-eye-slash eyes-button-custom"
-                      ></i>
-                    </button> </template></v-text-field
-              ></v-col>
-            </v-row>
+            <div class="grid gap-3">
+              <v-text-field
+                label="Tên đăng nhập"
+                variant="outlined"
+                density="comfortable"
+                v-model="useName"
+                :rules="rulesUserName"
+              ></v-text-field>
+              <v-text-field
+                label="Mật khẩu"
+                variant="outlined"
+                density="comfortable"
+                v-model="passWord"
+                :rules="rulesPassWord"
+                :type="visible ? 'text' : 'password'"
+                ><template v-slot:append-inner>
+                  <button type="button" @click="visible = !visible">
+                    <i v-if="visible" class="far fa-eye eyes-button-custom"></i>
+                    <i
+                      v-if="!visible"
+                      class="far fa-eye-slash eyes-button-custom"
+                    ></i>
+                  </button> </template
+              ></v-text-field>
+            </div>
           </v-form>
           <div class="text-center normal-case">
             <v-btn

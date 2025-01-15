@@ -32,11 +32,12 @@
         </div>
         <div class="grid md:grid-cols-2 gap-3">
           <div
-            class="rounded-lg p-3 hover:shadow-xl hover:bg-gray-200 border-2 bg-gray-100"
+            class="rounded-lg p-3 hover:shadow-xl hover:bg-gray-200 border-2 bg-gray-100 relative"
             :class="item.priority ? 'border-red-800' : 'border-blue-600 '"
             v-for="(item, index) in dataDetail.task_id"
             :key="index"
           >
+          <div class="ribbon-2" v-if="item.priority">Việc ưu tiên</div>
             <div
               class="text-sm font-bold text-red-darken-4 my-1"
               v-if="item.priority"

@@ -17,6 +17,7 @@ export const useBaseStore = defineStore({
     registerData: null,
     departmentListData: null,
     permissionListData: null,
+    userUpdateData: null,
   }),
   actions: {
     overlayChange(status: boolean) {
@@ -50,6 +51,13 @@ export const useBaseStore = defineStore({
         this.permissionListData = resp.data;
       });
       return this.permissionListData;
+    },
+    //cập nhật thông tin user
+    async updateUserInfo(url: string, params: any) {
+      await baseService.update(API_URL_BASE + url, params).then((resp) => {
+        this.userUpdateData = resp.data;
+      });
+      return this.userUpdateData;
     },
   },
   persist: true,

@@ -174,7 +174,7 @@
                 class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 dark:text-neutral-200 dark:hover:text-neutral-300"
                 :to="'/report'"
               >
-                <span class="mdi mdi-poll"></span>
+                <span class="mdi mdi-poll text-xl"></span>
                 Thống kê
               </router-link>
             </li>
@@ -189,7 +189,7 @@
                 aria-expanded="true"
                 aria-controls="setting-accordion-child"
               >
-                <span class="mdi mdi-cog"></span>
+                <span class="mdi mdi-cog text-xl"></span>
                 Cài đặt
 
                 <svg

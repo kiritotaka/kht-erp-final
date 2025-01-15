@@ -88,38 +88,39 @@
               :rules="rules"
               item-title="fullname"
               item-value="id"
+              return-object
             ></v-autocomplete>
             <v-text-field
               label="Số điện thoại"
               variant="outlined"
               density="comfortable"
-              v-model="phone_number"
+              v-model="phone_number_update"
               :rules="rules"
             ></v-text-field>
             <v-text-field
               label="Email"
               variant="outlined"
               density="comfortable"
-              v-model="email"
+              v-model="email_update"
               :rules="rules"
             ></v-text-field>
             <v-text-field
               label="Tên đăng nhập"
               variant="outlined"
               density="comfortable"
-              v-model="name"
+              v-model="name_update"
               :rules="rules"
             ></v-text-field>
             <v-text-field
               label="Mật khẩu"
               variant="outlined"
               density="comfortable"
-              v-model="password"
+              v-model="password_update"
               :rules="rules"
             ></v-text-field>
             <v-select
               label="Phòng ban"
-              v-model="department_id"
+              v-model="department_id_update"
               :items="departmentListData"
               variant="outlined"
               density="comfortable"
@@ -129,7 +130,7 @@
             ></v-select>
             <v-select
               label="Phân quyền"
-              v-model="permission_id"
+              v-model="permission_id_update"
               :items="permissionListData"
               variant="outlined"
               density="comfortable"
@@ -146,7 +147,7 @@
             @click="submit1"
             class="w-3/5 m-auto"
           >
-            Xác nhận
+            Cập nhật
           </v-btn>
         </div>
       </div>
@@ -171,6 +172,12 @@ export default {
       password: null,
       department_id: null,
       permission_id: null,
+      phone_number_update: null,
+      email_update: null,
+      name_update: null,
+      password_update: null,
+      department_id_update: null,
+      permission_id_update: null,
       rules: [
         (value) => {
           if (value) return true;
@@ -181,16 +188,19 @@ export default {
     };
   },
   computed: {
-    ...mapState(useBaseStore, ["departmentListData", "permissionListData"]),
+    ...mapState(useBaseStore, ["departmentListData", "permissionListData","dataLogin"]),
     ...mapState(useCustomerStore, ["userListData"]),
   },
   methods: {
-    ...mapActions(useBaseStore, ["registerAction", "snackChange"]),
+    ...mapActions(useBaseStore, [
+      "registerAction",
+      "snackChange",
+      "updateUserInfo",
+    ]),
     async submit() {
       const { valid } = await this.$refs.form.validate();
       if (valid) {
         let params = {
-          fullname: this.fullname,
           name: this.name,
           email: this.email,
           password: this.password,
@@ -214,6 +224,38 @@ export default {
     async submit1() {
       const { valid } = await this.$refs.form1.validate();
       if (valid) {
+        let params = {
+          user_id: this.userSelected.id,
+          name: this.name_update,
+          email: this.email_update,
+          password: this.password_update,
+          fullname: this.userSelected.fullname,
+          phone_number: this.phone_number_update,
+          permission_id: this.permission_id_update,
+          department_id: this.department_id_update,
+          role: '0'
+        };
+        this.updateUserInfo(`/user/${this.userSelected.id}`, params).then((resp) => {
+          if (resp) {
+            this.snackChange({
+              status: true,
+              message: "Cập nhật thông tin thành công",
+              color: "blue",
+            });
+          }
+        });
+      }
+    },
+  },
+  watch: {
+    userSelected(val) {
+      if (val) {
+        this.phone_number_update = val.phone_number;
+        this.email_update = val.email;
+        this.name_update = val.name;
+        this.password_update = val.password;
+        this.department_id_update = val.department_id;
+        this.permission_id_update = val.permission_id;
       }
     },
   },

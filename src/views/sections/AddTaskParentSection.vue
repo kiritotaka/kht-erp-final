@@ -5,7 +5,7 @@
         <div class="flex justify-between mb-5">
           <div class="font-bold text-xl">Thêm công việc</div>
           <div>
-            <span class="mdi mdi-close text-xl" @click="dialog = false"></span>
+            <span class="mdi mdi-close text-2xl cursor-pointer" @click="dialog = false"></span>
           </div>
         </div>
         <v-form ref="form" v-model="valid" @submit.prevent="submit">
@@ -44,6 +44,7 @@
             variant="flat"
             color="blue-darken-4"
             class="mt-3 w-3/5 m-auto"
+            size="large"
             @click="submit"
             ><span class="text-md normal-case">Xác nhận</span></v-btn
           >
